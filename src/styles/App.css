@@ -1,21 +1,46 @@
 /* Base Application Styles */
-body {
-  color: #fff;
-  background: #222;
+
+.header{
+  max-width: 1000px;
+  max-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
+.card{
+  background-color: gray;
+  cursor: pointer;
+  width: 290px;
+  height: 290px;
 }
-
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
+.text-center{
   text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+}
+
+.circle {
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.circle:hover{
+  color:yellow;
+}
+
+.icon-plus:before {
+  /*content: "\E005";*/
+  content: "\FF0B";
+}
+
+.navigation li{
+  display: inline;
 }

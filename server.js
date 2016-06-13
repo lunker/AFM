@@ -1,17 +1,29 @@
 /*eslint no-console:0 */
 'use strict';
-require('core-js/fn/object/assign');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const config = require('./webpack.config');
-const open = require('open');
 
-new WebpackDevServer(webpack(config), config.devServer)
-.listen(config.port, 'localhost', (err) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log('Listening at localhost:' + config.port);
-  console.log('Opening your system browser...');
-  open('http://localhost:' + config.port + '/webpack-dev-server/');
+const path = require('path');
+const express = require('express');
+const app= express();
+
+
+
+app.get('/src/styles/:resource', function(req,res){
+  res.sendFile(path.join(__dirname,'src','styles',req.params.resource));
+});
+/*
+  client resource
+ */
+app.get('/dist/:resource', function(req,res){
+  console.log('ASSET');
+  res.sendFile(path.join(__dirname,'dist',req.params.resource));
+});
+
+app.get('*', function (req, res) {
+  console.log('REQUEST');
+  res.sendFile(path.join(__dirname, 'src','index.html'));
+});
+
+
+app.listen(8888, function(){
+  console.log('listening ...');
 });
