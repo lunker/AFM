@@ -2,7 +2,7 @@
 import React from 'react';
 import NewTeamModal from './NewTeamModal';
 
-class NewTeam extends React.Component {
+class TeamApp extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -45,7 +45,7 @@ class NewTeam extends React.Component {
   }
 }
 
-NewTeam.defaultProps = {
+TeamApp.defaultProps = {
 };
 
-export default NewTeam;
+export default TeamApp;

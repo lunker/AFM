@@ -2,13 +2,22 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './components/Main';
-import Team from './components/Team/Team';
-import NavBar from './components/Frame/NavBar';
-import NewTeam from './components/Team/NewTeam';
 
+// REDUX
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+// REDUCER
+import appReducer from './reducers/index';
+
+// REACT VIEW
+import Main from './components/Main';
+import NavBar from './components/Frame/NavBar';
+import TeamApp from './components/Team/TeamApp';
+
+import TeamMake from './components/Team/TeamMake';
 
 import { Router, Route, Link, browserHistory } from 'react-router';
+
 
 class App extends React.Component{
   render(){
@@ -19,8 +28,7 @@ class App extends React.Component{
           <NavBar />
         </div>
         <div className='body'>
-        
-          <NewTeam />
+          {content}
         </div>
         <div className='footer'>
           <h1>footer</h1>
@@ -30,10 +38,16 @@ class App extends React.Component{
   }
 }
 
+let store = createStore(appReducer);
+
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="/team" components={{content : Team}}></Route>
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <Route path="/team" components={{content : TeamApp}}></Route>
+        <Route path="/team/make" components={{content : TeamMake}}></Route>
+      </Route>
+    </Router>
+  </Provider>
+
   , document.getElementById('app'));

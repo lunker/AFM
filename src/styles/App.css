@@ -44,3 +44,13 @@
 .navigation li{
   display: inline;
 }
+
+.teamModal{
+  width: 500px;
+}
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
