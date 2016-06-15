@@ -46,11 +46,17 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(195);
 
 	var _reactDom = __webpack_require__(38);
 
@@ -60,11 +66,11 @@
 
 	var _reactRedux = __webpack_require__(181);
 
-	var _index = __webpack_require__(519);
+	var _index = __webpack_require__(190);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Main = __webpack_require__(192);
+	var _Main = __webpack_require__(193);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -72,15 +78,13 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _TeamApp = __webpack_require__(521);
+	var _TeamApp = __webpack_require__(254);
 
 	var _TeamApp2 = _interopRequireDefault(_TeamApp);
 
-	var _TeamMake = __webpack_require__(520);
+	var _TeamMake = __webpack_require__(519);
 
 	var _TeamMake2 = _interopRequireDefault(_TeamMake);
-
-	var _reactRouter = __webpack_require__(195);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89,14 +93,14 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	// REDUX
 
 	// REDUCER
 
-
 	// REACT VIEW
 
+
+	var store = (0, _redux.createStore)(_index2.default);
 
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -108,10 +112,21 @@
 	  }
 
 	  _createClass(App, [{
+	    key: 'generateComp',
+	    value: function generateComp() {
+	      console.log('generateComp');
+	      var dispatch = this.props.dispatch;
+
+	      dispatch({ type: 'ADD_TEAM' });
+
+	      return _react2.default.Children.map(this.props.children, function (child) {
+	        return _react2.default.cloneElement(child, {});
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var content = this.props.content;
-
+	      //var Element = React.cloneElement({this.props.children}, {dispatch});
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -122,16 +137,16 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'body' },
-	          content
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'footer' },
+	          { className: 'container' },
+	          this.props.children,
 	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'footer'
+	            'div',
+	            { className: 'footer' },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              'footer'
+	            )
 	          )
 	        )
 	      );
@@ -141,22 +156,7 @@
 	  return App;
 	}(_react2.default.Component);
 
-	var store = (0, _redux.createStore)(_index2.default);
-
-	_reactDom2.default.render(_react2.default.createElement(
-	  _reactRedux.Provider,
-	  { store: store },
-	  _react2.default.createElement(
-	    _reactRouter.Router,
-	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(
-	      _reactRouter.Route,
-	      { path: '/', component: App },
-	      _react2.default.createElement(_reactRouter.Route, { path: '/team', components: { content: _TeamApp2.default } }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/team/make', components: { content: _TeamMake2.default } })
-	    )
-	  )
-	), document.getElementById('app'));
+	exports.default = (0, _reactRedux.connect)()(App); // react ~ redux
 
 /***/ },
 /* 1 */
@@ -21971,26 +21971,56 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 190 */,
-/* 191 */
-/***/ function(module, exports) {
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// Team Reducer
 
+	var _redux = __webpack_require__(168);
+
+	var _TeamReducer = __webpack_require__(191);
+
+	var _TeamReducer2 = _interopRequireDefault(_TeamReducer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var appReducer = (0, _redux.combineReducers)({
+	  teamReducer: _TeamReducer2.default
+	});
+
+	exports.default = appReducer;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _ActionTypes = __webpack_require__(192);
+
+	var types = _interopRequireWildcard(_ActionTypes);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// Team Reducer
 	var teams = function teams() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	  var action = arguments[1];
 
 
 	  switch (action.type) {
-	    case 'ADD':
+	    case types.ADD_TEAM:
+	      console.log('wow!!!');
 	      return {};
-	    case 'D':
+	    case types.DELETE_TEAM:
 	      return {};
 	    default:
 	      return state;
@@ -22001,6 +22031,18 @@
 
 /***/ },
 /* 192 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ADD_TEAM = exports.ADD_TEAM = 'ADD_TEAM';
+	var DELETE_TEAM = exports.DELETE_TEAM = 'DELETE_TEAM';
+
+/***/ },
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22053,7 +22095,6 @@
 	module.exports = Main;
 
 /***/ },
-/* 193 */,
 /* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27543,7 +27584,102 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 254 */,
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _NewTeamModal = __webpack_require__(255);
+
+	var _NewTeamModal2 = _interopRequireDefault(_NewTeamModal);
+
+	var _reactBootstrap = __webpack_require__(256);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TeamApp = function (_React$Component) {
+	  _inherits(TeamApp, _React$Component);
+
+	  function TeamApp(props, context) {
+	    _classCallCheck(this, TeamApp);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TeamApp).call(this, props, context));
+
+	    _this.state = {
+	      showModal: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(TeamApp, [{
+	    key: 'openModal',
+	    value: function openModal() {
+	      // alert("daf");
+	      // dispatch({test:'test'});
+	      this.setState({ showModal: true });
+	    }
+	  }, {
+	    key: 'closeModal',
+	    value: function closeModal() {
+	      this.setState({ showModal: false });
+	    }
+	  }, {
+	    key: 'go',
+	    value: function go() {
+	      var item = this.props.item;
+	      console.log(item);
+	      // item({type:'ADD'});
+	      alert('clicked!');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var dispatch = this.props.dispatch;
+
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'card text-center' },
+	        _react2.default.createElement('button', { className: 'circle icon-plus', onClick: this.openModal.bind(this) }),
+	        _react2.default.createElement(
+	          'strong',
+	          null,
+	          ' add new team '
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          { onClick: this.go.bind(this) },
+	          '테스트 redux'
+	        ),
+	        _react2.default.createElement(_NewTeamModal2.default, { show: this.state.showModal })
+	      );
+	    }
+	  }]);
+
+	  return TeamApp;
+	}(_react2.default.Component);
+
+	TeamApp.defaultProps = {};
+
+	exports.default = TeamApp;
+
+/***/ },
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -46754,35 +46890,15 @@
 	  value: true
 	});
 
-	var _redux = __webpack_require__(168);
-
-	var _TeamReducer = __webpack_require__(191);
-
-	var _TeamReducer2 = _interopRequireDefault(_TeamReducer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var appReducer = (0, _redux.combineReducers)({
-	  teamReducer: _TeamReducer2.default
-	});
-
-	exports.default = appReducer;
-
-/***/ },
-/* 520 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(181);
+
+	var _reactBootstrap = __webpack_require__(256);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46795,22 +46911,72 @@
 	var TeamMake = function (_React$Component) {
 	  _inherits(TeamMake, _React$Component);
 
-	  function TeamMake() {
+	  function TeamMake(props, context) {
 	    _classCallCheck(this, TeamMake);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TeamMake).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TeamMake).call(this, props, context));
+
+	    _this.state = {
+	      value: ''
+	    };
+	    return _this;
 	  }
 
 	  _createClass(TeamMake, [{
 	    key: 'render',
 	    value: function render() {
+	      var dispatch = this.props.dispatch;
+
+
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'subHead' },
 	        _react2.default.createElement(
-	          'h1',
+	          'h2',
+	          { className: 'subHead-heading' },
+	          '나의 팀 생성'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'subHead-description' },
+	          '당신의 팀을 생성합니다.'
+	        ),
+	        _react2.default.createElement(
+	          'form',
 	          null,
-	          '팀 생성 화면'
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            {
+	              controlId: 'formBasicText' },
+	            _react2.default.createElement(
+	              _reactBootstrap.ControlLabel,
+	              null,
+	              '팀 명'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, {
+	              type: 'text',
+	              value: this.state.value,
+	              placeholder: '팀 이름을 입력하세요'
+	            }),
+	            _react2.default.createElement(
+	              _reactBootstrap.ControlLabel,
+	              null,
+	              '팀 소개'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: '소개를 입력하세요' })
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { bsStyle: 'primary', onClick: function onClick() {
+	                return dispatch({ type: 'ADD' });
+	              } },
+	            'ok'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { bsStyle: 'danger' },
+	            'cancel'
+	          )
 	        )
 	      );
 	    }
@@ -46821,97 +46987,7 @@
 
 	TeamMake.defaultProps = {};
 
-	exports.default = TeamMake;
-
-/***/ },
-/* 521 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _NewTeamModal = __webpack_require__(255);
-
-	var _NewTeamModal2 = _interopRequireDefault(_NewTeamModal);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var TeamApp = function (_React$Component) {
-	  _inherits(TeamApp, _React$Component);
-
-	  function TeamApp(props, context) {
-	    _classCallCheck(this, TeamApp);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TeamApp).call(this, props, context));
-
-	    _this.state = {
-	      showModal: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(TeamApp, [{
-	    key: 'openModal',
-	    value: function openModal() {
-	      // alert("daf");
-	      this.setState({ showModal: true });
-	    }
-	  }, {
-	    key: 'closeModal',
-	    value: function closeModal() {
-	      this.setState({ showModal: false });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'card text-center' },
-	        _react2.default.createElement('button', { className: 'circle icon-plus', onClick: this.openModal.bind(this) }),
-	        _react2.default.createElement(
-	          'strong',
-	          null,
-	          ' add new team '
-	        ),
-	        _react2.default.createElement(_NewTeamModal2.default, { show: this.state.showModal })
-	      )
-	      /*
-	      <div>
-	        <Modal show={this.state.showModal} onHide={this.closeModal.bind(this)} animation={true}>
-	          <Modal.Header>
-	            h!
-	          </Modal.Header>
-	          <Modal.Body>
-	            <h4>test</h4>
-	          </Modal.Body>
-	        </Modal>
-	      </div>
-	      */
-	      ;
-	    }
-	  }]);
-
-	  return TeamApp;
-	}(_react2.default.Component);
-
-	TeamApp.defaultProps = {};
-
-	exports.default = TeamApp;
+	exports.default = (0, _reactRedux.connect)()(TeamMake);
 
 /***/ }
 /******/ ]);

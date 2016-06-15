@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    index: './src/app.js',
+    index: './src/index.js',
   },
   module: {
     loaders: [

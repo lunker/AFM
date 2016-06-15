@@ -1,13 +1,16 @@
-// Team Reducer
+'use strict';
+import * as types from '../constants/ActionTypes';
 
+// Team Reducer
 const teams = (state=[], action) => {
 
   switch(action.type){
-    case 'ADD':
+    case types.ADD_TEAM:
+      console.log('wow!!!');
       return {
-        
+
       };
-    case 'D':
+    case types.DELETE_TEAM:
       return {
 
       };

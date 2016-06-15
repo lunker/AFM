@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import teamReducer from './TeamReducer';
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   teamReducer
 });
 
-export default appReducer;
+export default rootReducer;
