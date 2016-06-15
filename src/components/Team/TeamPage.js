@@ -1,16 +1,15 @@
 'use strict';
 
 import React from 'react';
+import {Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import NewTeamModal from './NewTeamModal';
-import {Button} from 'react-bootstrap';
-
+import TeamCard from './TeamCard';
 
 class TeamPage extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       showModal:false
     };
@@ -18,28 +17,21 @@ class TeamPage extends React.Component {
 
   openModal(){
     // alert("daf");
-    // dispatch({test:'test'});
     this.setState({showModal : true});
   }
   closeModal(){
     this.setState({showModal : false});
   }
 
-  go(){
-    const item = this.props.item;
-    console.log(item);
-    // item({type:'ADD'});
-    alert('clicked!');
-
-  }
   render() {
     const {dispatch} = this.props;
 
     return (
       <div>
+        <h1>team main page</h1>
+        <TeamCard />
         {this.props.children}
       </div>
-
     );
   }
 }

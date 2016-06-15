@@ -14,7 +14,6 @@ class TeamMake extends React.Component {
   }
 
   render() {
-    const {dispatch} = this.props;
 
     return (
       <div className='subHead'>
@@ -30,12 +29,20 @@ class TeamMake extends React.Component {
               value={this.state.value}
               placeholder="팀 이름을 입력하세요"
             />
+
+            <ControlLabel>팀 종목</ControlLabel>
+            <FormControl componentClass="select" placeholder="select">
+              <option value="select">select</option>
+              <option value="other">...</option>
+            </FormControl>
+
             <ControlLabel>팀 소개</ControlLabel>
             <FormControl componentClass="textarea" placeholder="소개를 입력하세요" />
 
+            
 
           </FormGroup>
-          <Button bsStyle="primary" onClick={()=>dispatch({type:'ADD'})}>ok</Button><Button bsStyle="danger">cancel</Button>
+          <Button bsStyle="primary">ok</Button><Button bsStyle="danger">cancel</Button>
         </form>
       </div>
     );
@@ -45,4 +52,4 @@ class TeamMake extends React.Component {
 TeamMake.defaultProps = {
 };
 
-export default connect()(TeamMake);
+export default TeamMake;

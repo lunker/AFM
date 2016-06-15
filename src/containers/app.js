@@ -6,16 +6,10 @@ import ReactDOM from 'react-dom';
 // REDUX
 import { createStore } from 'redux';
 import { Provider, connect} from 'react-redux';
-// REDUCER
-import appReducer from './reducers/index';
-// REACT VIEW
-import Main from './components/Main';
-import NavBar from './components/Frame/NavBar';
-import TeamPage from './components/Team/TeamPage';
-import TeamMake from './components/Team/TeamMake';
+
+import NavBar from '../components/Frame/NavBar';
 
 class App extends React.Component{
-
   // generateComp(){
   //   console.log('generateComp');
   //   const {dispatch} = this.props;
