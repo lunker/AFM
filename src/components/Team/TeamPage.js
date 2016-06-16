@@ -4,7 +4,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import NewTeamModal from './NewTeamModal';
-import TeamCard from './TeamCard';
+import NewTeamCard from './NewTeamCard';
 
 class TeamPage extends React.Component {
 
@@ -29,7 +29,8 @@ class TeamPage extends React.Component {
     return (
       <div>
         <h1>team main page</h1>
-        <TeamCard />
+        <NewTeamCard />
+        <div className='row'></div>
         {this.props.children}
       </div>
     );

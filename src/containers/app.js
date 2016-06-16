@@ -10,17 +10,7 @@ import { Provider, connect} from 'react-redux';
 import NavBar from '../components/Frame/NavBar';
 
 class App extends React.Component{
-  // generateComp(){
-  //   console.log('generateComp');
-  //   const {dispatch} = this.props;
-  //   dispatch({type:'ADD_TEAM'});
-  //
-  //   return React.Children.map(this.props.children, child =>
-  //    React.cloneElement(child, {
-  //
-  //    })
-  //  );
-  // }
+
   render(){
     return(
       <div>
