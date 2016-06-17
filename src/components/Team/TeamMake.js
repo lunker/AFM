@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Button, FormGroup, ControlLabel,FormControl} from 'react-bootstrap';
 import * as actions from '../../actions/index';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 
 class TeamMake extends React.Component {
 
@@ -19,6 +19,7 @@ class TeamMake extends React.Component {
     this.refs.teamName.value='';
     this.refs.teamDescription.value='';
     browserHistory.push('/team');
+    this.props.dispatch(actions.getTeams());
   }
 
   makeNewTeam(){

@@ -5,7 +5,9 @@ import * as types from '../constants/ActionTypes';
 
 // Team Reducer
 const teams = (state={
-  isFetching: false
+  items:[],
+  isFetching: false,
+  teamInfo:{}
 }, action) => {
 
   switch(action.type){
@@ -16,12 +18,25 @@ const teams = (state={
         isFetching:true
       });
 
-    case types.RECEIVE_TEAM:
-      console.log('[REDUCER][RECEIVE_TEAM]');
+    case types.RECEIVE_TEAMS:
+      console.log('[REDUCER][RECEIVE_TEAMS]');
       return Object.assign({}, state, {
+        items: action.teams,
         isFetching: false
       });
 
+    case types.RECEIVE_TEAM:
+      console.log('[REDUCER][RECEIVE_TEAM]');
+      return Object.assign({}, state, {
+        teamInfo: action.team,
+        isFetching: false
+      });
+
+    case types.RECEIVE_RESULT:
+      console.log('[REDUCER][RECEIVE_RESULT]');
+      return Object.assign({}, state, {
+        isFetching: false
+      });
     case types.ADD_TEAM:
       console.log('wow!!!');
       return {

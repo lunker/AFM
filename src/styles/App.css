@@ -27,11 +27,28 @@
   color: #767676;
 }
 
-.card{
+.newcard{
   background-color: gray;
   cursor: pointer;
   width: 290px;
   height: 290px;
+}
+
+.row{
+  margin-right: 24px;
+}
+
+.clickable{
+  cursor:pointer;
+}
+.card{
+  background-color: white;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  border: 1px solid #dbd8d8;
+  border-width: 1px 1px 2px 1px;
+  box-shadow: 0 1px 0 #e7e7e7;
 }
 .text-center{
   text-align: center;

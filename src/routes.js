@@ -11,7 +11,7 @@ export default (
   <Route path="/" component={App}>
     <Route path="/team" component={TeamPage}>
       <Route path="newteam" component={TeamMake} />
-      <Route path="teaminfo" component={TeamInfo} />
+      <Route path="teaminfo/:team_id" component={TeamInfo} />
     </Route>
   </Route>
 )

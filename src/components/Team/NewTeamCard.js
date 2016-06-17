@@ -22,7 +22,7 @@ class NewTeamCard extends React.Component {
 
   render() {
     return (
-      <div className="card text-center">
+      <div className="newcard text-center">
         <button className="circle icon-plus" onClick={this.openModal.bind(this)}></button>
         <strong> add new team </strong>
 

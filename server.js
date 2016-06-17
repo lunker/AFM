@@ -14,7 +14,7 @@ db.on('error', console.error);
 db.once('open', function(){
   console.log('connected to mongod server');
 });
-mongoose.connect('mongodb://localhost/');
+mongoose.connect('mongodb://localhost/afm');
 
 app.use(bodyParser.json());
 
@@ -30,19 +30,45 @@ app.get('/dist/:resource', function(req,res){
   res.sendFile(path.join(__dirname,'dist',req.params.resource));
 });
 
-app.get('*', function (req, res) {
-  console.log('REQUEST');
-  res.sendFile(path.join(__dirname, 'src','index.html'));
-});
 
 /*
   FIND TEAM
- */
 app.get('/team/:team_id', function(req,res){
+  console.log('[GET][TEAM_BY_ID]');
   Team.find({id:req.params.team_id},function(err,teams){
     if(err){
       return res.status(500).json({error:err});
     }
+    res.json(teams);
+  });
+});
+*/
+
+
+/*
+  FIND ALL TEAM
+ */
+app.get('/teams', function(req,res){
+  console.log('[REQUEST][ALL_TEAM]');
+  Team.find(function(err,teams){
+    if(err){
+      return res.status(500).json({error:'error!'});
+    }
+    console.log('[REQUEST][ALL_TEAM] :'+teams);
+    res.json(teams);
+  });
+});
+
+/*
+  FIND TEAM BY ID
+ */
+app.get('/teams/:team_id', function(req,res){
+  console.log('[REQUEST][ALL_TEAM]');
+  Team.find({_id: req.params.team_id}, function(err,teams){
+    if(err){
+      return res.status(500).json({error:'error!'});
+    }
+    console.log('[REQUEST][ALL_TEAM] :'+teams);
     res.json(teams);
   });
 });
@@ -55,7 +81,7 @@ app.post('/team/newteam', function(req,res){
   var team=new Team();
   team.name=req.body.name;
   team.description=req.body.description;
-
+  console.log('[REQUEST][TEAM][MAKE NEW TEAM] : '+team);
   team.save(function(err){
     if(err){
       console.error(err);
@@ -65,6 +91,11 @@ app.post('/team/newteam', function(req,res){
     res.json({result:1});
   });
 
+});
+
+app.get('*', function (req, res) {
+  console.log('REQUEST');
+  res.sendFile(path.join(__dirname, 'src','index.html'));
 });
 
 app.listen(8888, function(){

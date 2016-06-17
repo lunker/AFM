@@ -1,6 +1,8 @@
 
 import React from 'react';
 import NewTeamModal from './NewTeamModal';
+import {browserHistory} from 'react-router';
+
 
 class TeamCard extends React.Component {
 
@@ -10,24 +12,36 @@ class TeamCard extends React.Component {
     this.state = {
       showModal:false
     };
+
+    // this.openTeamInfo = (teamId) => this.openTeamInfo(teamId);
   }
 
-  openModal(){
-    // alert("daf");
-    this.setState({showModal : true});
+  openTeamInfo(teamId){
+    // this.props.showTeamInfo().then();
+    console.log(teamId);
+    console.log('[TEAM_CARD] call openTeamInfo()');
+
+    browserHistory.push('/team/teaminfo/'+teamId);
   }
-  closeModal(){
-    this.setState({showModal : false});
+
+  wow(){
+    console.log("뭐지 ");
   }
 
   render() {
     return (
-      <div className="card text-center">
-        <button className="circle icon-plus" onClick={this.openModal.bind(this)}></button>
-        <strong> add new team </strong>
 
-        <NewTeamModal show={this.state.showModal} close={this.closeModal.bind(this)} />
+      <div className='row'>
+        {this.props.teams.map((team,index) =>
+          <div className="card text-center clickable col-md-4" key={index} >
+          <div onClick={()=>this.props.openTeamInfo(team._id)}>
+            <h1>{team.name} + {team.description}</h1>
+          </div>
+
+          </div>
+        )}
       </div>
+
     );
   }
 }
