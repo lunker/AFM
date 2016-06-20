@@ -1,21 +1,96 @@
 /* Base Application Styles */
-body {
-  color: #fff;
-  background: #222;
+
+.header{
+  max-width: 1000px;
+  max-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 980px;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
+.subHead{
+  padding-bottom:5px;
+  margin-bottom:15px;
+  border-bottom:1px solid #e5e5e5;
+}
+.subHead-heading{
+  font-weight: normal;
+}
+.subHead-description{
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #767676;
 }
 
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
+.newcard{
+  background-color: gray;
+  cursor: pointer;
+  width: 290px;
+  height: 290px;
+}
+
+.row{
+  margin-right: 24px;
+}
+
+.clickable{
+  cursor:pointer;
+}
+.card{
+  background-color: white;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  border: 1px solid #dbd8d8;
+  border-width: 1px 1px 2px 1px;
+  box-shadow: 0 1px 0 #e7e7e7;
+}
+.text-center{
   text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+}
+
+.circle {
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.circle:hover{
+  color:yellow;
+}
+
+.icon-plus:before {
+  /*content: "\E005";*/
+  content: "\FF0B";
+}
+
+.navigation li{
+  display: inline;
+}
+
+.teamModal{
+  width: 500px;
+}
+
+.loginModal{
+  width: 300px;
+}
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
 }
