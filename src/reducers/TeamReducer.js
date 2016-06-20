@@ -27,6 +27,7 @@ const teams = (state={
 
     case types.RECEIVE_TEAM:
       console.log('[REDUCER][RECEIVE_TEAM]');
+      console.log(action.team);
       return Object.assign({}, state, {
         teamInfo: action.team,
         isFetching: false
@@ -36,7 +37,8 @@ const teams = (state={
       console.log('[REDUCER][RECEIVE_RESULT]');
       return Object.assign({}, state, {
         isFetching: false
-      });
+    });
+
     case types.ADD_TEAM:
       console.log('wow!!!');
       return {

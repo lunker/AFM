@@ -27383,6 +27383,10 @@
 
 	var _TeamInfo2 = _interopRequireDefault(_TeamInfo);
 
+	var _TeamFind = __webpack_require__(864);
+
+	var _TeamFind2 = _interopRequireDefault(_TeamFind);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
@@ -27390,10 +27394,11 @@
 	  { path: '/', component: _App2.default },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/team', component: _TeamPage2.default },
-	    _react2.default.createElement(_reactRouter.Route, { path: 'newteam', component: _TeamMake2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'teaminfo/:team_id', component: _TeamInfo2.default })
-	  )
+	    { path: 'team', component: _TeamPage2.default },
+	    _react2.default.createElement(_reactRouter.Route, { path: 'newteam', component: _TeamMake2.default })
+	  ),
+	  _react2.default.createElement(_reactRouter.Route, { path: 'teaminfo/:team_id', component: _TeamInfo2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: 'teamfind', component: _TeamFind2.default })
 	);
 
 /***/ },
@@ -27581,6 +27586,8 @@
 
 	var _reactBootstrap = __webpack_require__(254);
 
+	var _reactRouter = __webpack_require__(169);
+
 	var _reactRedux = __webpack_require__(230);
 
 	var _NewTeamModal = __webpack_require__(517);
@@ -27632,7 +27639,10 @@
 	  }, {
 	    key: 'openTeamInfo',
 	    value: function openTeamInfo(teamId) {
-	      this.props.dispatch(actions.getTeamById(teamId)).then(_reactBootstrap.browserHistory.push('/team/teaminfo/' + teamId));
+
+	      console.log('team id ; ' + teamId);
+	      this.props.dispatch(actions.getTeamById(teamId)).then(_reactRouter.browserHistory.push('/teaminfo/' + teamId));
+	      // browserHistory.push('/team/teaminfo/'+teamId);
 	    }
 	  }, {
 	    key: 'render',
@@ -46867,8 +46877,12 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.Button,
-	              { bsStyle: 'primary', bsSize: 'large', block: true },
-	              '팀 가입'
+	              { bsStyle: 'primary', bsSize: 'large', block: true, onClick: this.props.close },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/teamfind' },
+	                '팀 가입'
+	              )
 	            )
 	          )
 	        )
@@ -47194,6 +47208,7 @@
 
 	// state
 	var REQUEST_TEAM = exports.REQUEST_TEAM = 'REQUEST_TEAM';
+	var RECEIVE_TEAM = exports.RECEIVE_TEAM = 'RECEIVE_TEAM';
 	var RECEIVE_TEAMS = exports.RECEIVE_TEAMS = 'RECEIVE_TEAMS';
 	var RECEIVE_RESULT = exports.RECEIVE_RESULT = 'RECEIVE_RESULT';
 
@@ -47862,11 +47877,18 @@
 	  }
 
 	  _createClass(TeamInfo, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      // const {dispatch, isFetching, teamInfo}=this.props;
+	      // dispatch(actions.getTeamById(this.props.params.team_id));
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      // fetch team info
-	      var teamId = this.props.params.team_id;
-	      // dispatch(actions.getTeamById(teamId));
+	      // const teamId = this.props.params.team_id;
+	      // const {dispatch, isFetching, teamInfo}=this.props;
+	      // console.log(teamInfo);
 	    }
 	  }, {
 	    key: 'render',
@@ -47880,10 +47902,16 @@
 	        'div',
 	        null,
 	        !isFetching && _react2.default.createElement(
-	          'h1',
+	          'div',
 	          null,
-	          'team name : ',
-	          teamInfo.name
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'team name : ',
+	            teamInfo[0].name
+	          ),
+	          'team description : ',
+	          teamInfo[0].description
 	        )
 	      );
 	    }
@@ -47909,7 +47937,7 @@
 	  };
 	}
 
-	exports.default = TeamInfo;
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(TeamInfo);
 
 /***/ },
 /* 526 */
@@ -60574,10 +60602,15 @@
 
 	var _TeamReducer2 = _interopRequireDefault(_TeamReducer);
 
+	var _TeamFindReducer = __webpack_require__(865);
+
+	var _TeamFindReducer2 = _interopRequireDefault(_TeamFindReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
-	  teamReducer: _TeamReducer2.default
+	  teamReducer: _TeamReducer2.default,
+	  TeamFindReducer: _TeamFindReducer2.default
 	});
 
 	exports.default = rootReducer;
@@ -60627,6 +60660,7 @@
 
 	    case types.RECEIVE_TEAM:
 	      console.log('[REDUCER][RECEIVE_TEAM]');
+	      console.log(action.team);
 	      return Object.assign({}, state, {
 	        teamInfo: action.team,
 	        isFetching: false
@@ -60637,6 +60671,7 @@
 	      return Object.assign({}, state, {
 	        isFetching: false
 	      });
+
 	    case types.ADD_TEAM:
 	      console.log('wow!!!');
 	      return {};
@@ -60648,6 +60683,179 @@
 	}; // end teams
 
 	exports.default = teams;
+
+/***/ },
+/* 864 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(38);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactBootstrap = __webpack_require__(254);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TeamFind = function (_React$Component) {
+	  _inherits(TeamFind, _React$Component);
+
+	  function TeamFind(props, context) {
+	    _classCallCheck(this, TeamFind);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TeamFind).call(this, props, context));
+
+	    _this.state = {
+	      results: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(TeamFind, [{
+	    key: 'searchTeam',
+	    value: function searchTeam() {
+	      var name = _reactDom2.default.findDOMNode(this.refs.name).value;
+
+	      $.ajax({
+	        url: 'http://localhost:8888/teams/name/' + name,
+	        dataType: 'json',
+	        cache: false,
+	        success: function (data) {
+	          this.setState({ results: data });
+	          console.log(data);
+	        }.bind(this),
+	        error: function (xhr, status, err) {
+	          console.error('', status, err.toString());
+	        }.bind(this)
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Team find page'
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Form,
+	          { horizontal: true },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { controlId: 'formHorizontalEmail' },
+	            _react2.default.createElement(
+	              _reactBootstrap.Col,
+	              { componentClass: _reactBootstrap.ControlLabel, sm: 2 },
+	              '팀 이름'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Col,
+	              { sm: 6 },
+	              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '팀 이름을 입력하세요', ref: 'name' })
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { sm: 2, onClick: function onClick() {
+	                  return _this2.searchTeam();
+	                } },
+	              '검색'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.state.results.map(function (result, index) {
+	            return _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'li',
+	                { key: index },
+	                result.name,
+	                ' =>> ',
+	                result.description
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TeamFind;
+	}(_react2.default.Component);
+
+	exports.default = TeamFind;
+
+/***/ },
+/* 865 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _ActionTypes = __webpack_require__(521);
+
+	var types = _interopRequireWildcard(_ActionTypes);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// Team Reducer
+	var TeamFindReducer = function TeamFindReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {
+	    isFetching: false,
+	    results: []
+	  } : arguments[0];
+	  var action = arguments[1];
+
+
+	  switch (action.type) {
+
+	    case types.REQUEST_TEAM:
+	      console.log('[REDUCER][REQUEST_TEAM]');
+	      return Object.assign({}, state, {
+	        isFetching: true
+	      });
+
+	    case types.RECEIVE_TEAMS:
+	      console.log('[REDUCER][RECEIVE_TEAMS]');
+	      return Object.assign({}, state, {
+	        items: action.teams,
+	        isFetching: false
+	      });
+
+	    default:
+	      return state;
+	  }
+	}; // end teams
+
+	exports.default = TeamFindReducer;
 
 /***/ }
 /******/ ]);

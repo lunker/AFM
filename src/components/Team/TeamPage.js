@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Button} from 'react-bootstrap';
-import {browserHistory} from 'react-bootstrap';
+import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import NewTeamModal from './NewTeamModal';
 import NewTeamCard from './NewTeamCard';
@@ -24,7 +24,10 @@ class TeamPage extends React.Component {
   }
 
   openTeamInfo(teamId){
-    this.props.dispatch(actions.getTeamById(teamId)).then(browserHistory.push('/team/teaminfo/'+teamId));
+
+    console.log('team id ; ' + teamId);
+    this.props.dispatch(actions.getTeamById(teamId)).then(browserHistory.push('/teaminfo/'+teamId));
+    // browserHistory.push('/team/teaminfo/'+teamId);
   }
   render() {
     const {dispatch, items, isFetching} = this.props;

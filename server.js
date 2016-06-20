@@ -63,12 +63,30 @@ app.get('/teams', function(req,res){
   FIND TEAM BY ID
  */
 app.get('/teams/:team_id', function(req,res){
-  console.log('[REQUEST][ALL_TEAM]');
+  console.log('[REQUEST][TEAM_BY_ID]');
   Team.find({_id: req.params.team_id}, function(err,teams){
     if(err){
       return res.status(500).json({error:'error!'});
     }
-    console.log('[REQUEST][ALL_TEAM] :'+teams);
+    res.json(teams);
+  });
+});
+
+/*
+  FIND TEAM BY NAME
+ */
+app.get('/teams/name/:team_name', function(req,res){
+  console.log('[REQUEST][TEAM_BY_NAME]');
+  console.log('[REQUEST][TEAM_BY_NAME] params : ' + req.params.team_name);
+  const query='/'+req.params.team_name+'/';
+  console.log('query ; ' + query);
+
+
+  Team.find({'name': new RegExp(req.params.team_name)}, function(err,teams){
+    if(err){
+      return res.status(500).json({error:'error!'});
+    }
+    console.log(teams);
     res.json(teams);
   });
 });

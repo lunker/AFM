@@ -10,10 +10,16 @@ class TeamInfo extends React.Component {
 
   }
 
+  componentWillMount(){
+    // const {dispatch, isFetching, teamInfo}=this.props;
+    // dispatch(actions.getTeamById(this.props.params.team_id));
+  }
+
   componentDidMount(){
     // fetch team info
-    const teamId = this.props.params.team_id;
-    // dispatch(actions.getTeamById(teamId));
+    // const teamId = this.props.params.team_id;
+    // const {dispatch, isFetching, teamInfo}=this.props;
+    // console.log(teamInfo);
   }
 
   render() {
@@ -21,9 +27,12 @@ class TeamInfo extends React.Component {
     return (
       <div>
       {!isFetching &&
-        <h1>team name : {teamInfo.name}</h1>
-      }
+        <div>
+          <h1>team name : {teamInfo[0].name}</h1>
+          team description : {teamInfo[0].description}
 
+        </div>
+      }
       </div>
     );
   }
@@ -46,4 +55,4 @@ function mapStateToProps(state){
 }
 
 
-export default TeamInfo;
+export default connect(mapStateToProps)(TeamInfo);
