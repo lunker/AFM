@@ -84,6 +84,10 @@
 .teamModal{
   width: 500px;
 }
+
+.loginModal{
+  width: 300px;
+}
 .modal-container {
   position: relative;
 }
