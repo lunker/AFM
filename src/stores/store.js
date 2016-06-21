@@ -3,6 +3,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
+import localStorageLoad from './localStorageLoad';
+import localStorageDump from './localStorageDump';
 
 const enhancer = compose(
   // Middleware you want to use in development:
@@ -11,7 +13,7 @@ const enhancer = compose(
 );
 
 const createStoreWithMiddleware = compose(
-  applyMiddleware(thunkMiddleware),
+  applyMiddleware(localStorageLoad, thunkMiddleware, localStorageDump),
   enhancer
 )(createStore);
 

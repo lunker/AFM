@@ -53,8 +53,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-
-
 /*
   회원가입
  */

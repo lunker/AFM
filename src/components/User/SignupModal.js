@@ -18,7 +18,7 @@ class SignupModal extends React.Component {
             <input type='email' ref='id'/>
             <input type='password' ref='password'/>
 
-            <Button bsStyle='danger' onClick={()=>this.props.opensignup()}>이메일로 회원가입</Button>
+            <Button bsStyle='danger' onClick={()=>this.props.openSignupFormModal()}>이메일로 회원가입</Button>
           </Modal.Body>
 
           <Modal.Footer>

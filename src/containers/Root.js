@@ -5,11 +5,13 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import routes from '../routes';
 import DevTools from './DevTools';
-import store from '../stores/store';
+import configureStore from '../stores/store';
 
 export default class Root extends Component {
   render() {
-    const Store = store();
+    const Store = configureStore();
+    Store.dispatch({type:'INIT'});
+
     return (
       <Provider store={Store}>
         <div>

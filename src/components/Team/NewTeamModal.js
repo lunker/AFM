@@ -14,7 +14,7 @@ class NewTeamModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <Button bsStyle="primary" bsSize="large" block onClick={this.props.close}><Link to="/team/newteam">팀 생성</Link></Button>
-            <Button bsStyle="primary" bsSize="large" block onClick={this.props.close}><Link to="/teamfind">팀 가입</Link></Button>
+            <Button bsStyle="primary" bsSize="large" block onClick={this.props.close}><Link to="/teamsearch">팀 가입</Link></Button>
           </Modal.Body>
         </Modal>
       </div>

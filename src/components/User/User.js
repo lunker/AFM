@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Dropdown, MenuItem} from 'react-bootstrap';
-import UserActions from '../../actions/User';
+import * as UserActions from '../../actions/User';
 import LoginModal from './LoginModal';
 import SignupModal from './SignupModal';
 import SignupFormModal from './SignupFormModal';
@@ -74,28 +74,6 @@ class User extends React.Component{
     }
   }
 
-  openLoginModal(){
-    this.setState({isLoginModalOpened: true});
-  }
-  closeLoginModal(){
-    this.setState({isLoginModalOpened: false});
-  }
-
-  openSignupModal(){
-    this.setState({isSignupModalOpened: true});
-  }
-  closeSignupModal(){
-    this.setState({isSignupModalOpened: false});
-  }
-
-  openSignupFormModal(){
-    this.closeSignupModal();
-    this.setState({isSignupFormModalOpened: true});
-  }
-  closeSignupFormModal(){
-    this.setState({isSignupFormModalOpened: false});
-  }
-
   render (){
     const {isLogin}=this.props;
 
@@ -109,33 +87,35 @@ class User extends React.Component{
 
           {!isLogin &&
             <CustomMenu bsRole="menu">
-              <MenuItem eventKey="1" onClick={()=> this.openLoginModal()}>로그인</MenuItem>
-              <MenuItem eventKey="2" onClick={()=> this.openSignupModal()}>회원가입</MenuItem>
+              <MenuItem eventKey="1" onClick={()=> this.props.openLoginModal()}>로그인</MenuItem>
+              <MenuItem eventKey="2" onClick={()=> this.props.openSignupModal()}>회원가입</MenuItem>
               <MenuItem eventKey="3" active>Orange</MenuItem>
             </CustomMenu>
           }
 
           {isLogin &&
             <CustomMenu bsRole="menu">
-              <MenuItem eventKey="1" onClick={()=> this.openLoginModal()}>로그인됐다!!!</MenuItem>
+              <MenuItem eventKey="1" onClick={()=> this.props.openLoginModal()}>로그인됐다!!!</MenuItem>
             </CustomMenu>
           }
 
         </Dropdown>
 
+
         <LoginModal
-          show={this.state.isLoginModalOpened}
-          close={()=>this.closeLoginModal()}
-          login={(user)=>this.props.login(user)} />
+          show={this.props.isLoginModalOpened}
+          close={()=>this.props.closeLoginModal()}
+          login={(user)=>this.props.login(user)}
+          openSignupModal={()=>this.props.openSignupModal()}/>
 
         <SignupModal
-          show={this.state.isSignupModalOpened}
-          close={()=>this.closeSignupModal()}
-          opensignup={()=>this.openSignupFormModal()}/>
+          show={this.props.isSignupModalOpened}
+          close={()=>this.props.closeSignupModal()}
+          openSignupFormModal={()=>this.props.openSignupFormModal()}/>
 
         <SignupFormModal
-          show={this.state.isSignupFormModalOpened}
-          close={()=>this.closeSignupFormModal()}
+          show={this.props.isSignupFormModalOpened}
+          close={()=>this.props.closeSignupFormModal()}
           signup={(user)=>this.props.signup(user)}/>
       </div>
     );

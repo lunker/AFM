@@ -44,6 +44,31 @@ export function signup(user){
 }
 
 
+export function openLoginModal(){
+  console.log('[ACTION][OPEN_LOGIN_MODAL]');
+  return {type:types.OPEN_LOGIN_MODAL};
+}
+export function closeLoginModal(){
+  console.log('[ACTION][CLOSE_LOGIN_MODAL]');
+  return {type:types.CLOSE_LOGIN_MODAL};
+}
+export function openSignupModal(){
+  console.log('[ACTION][OPEN_SIGNUP_MODAL]');
+  return {type:types.OPEN_SIGNUP_MODAL};
+}
+export function closeSignupModal(){
+  console.log('[ACTION][CLOSE_SIGNUP_MODAL]');
+  return {type:types.CLOSE_SIGNUP_MODAL};
+}
+export function OPEN_SIGNUP_FORM_MODAL(){
+  console.log('[ACTION][OPEN_SIGNUP_FORM_MODAL]');
+  return {type:types.OPEN_SIGNUP_FORM_MODAL};
+}
+export function closelSignupFormModal(){
+  console.log('[ACTION][CLOSE_SIGNUP_FORM_MODAL]');
+  return {type:types.CLOSE_SIGNUP_FORM_MODAL};
+}
+
 
 function requestLogin(){
   console.log('[ACTION][REQUEST_LOGIN]');
@@ -52,6 +77,7 @@ function requestLogin(){
 
 function receiveLogin(result){
   console.log('[ACTION][RECEIVE_LOGIN]');
+  console.log(result);
  return {type:types.RECEIVE_LOGIN, result: result};
 }
 

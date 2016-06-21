@@ -30,7 +30,7 @@ class LoginModal extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            아직 회원이 아니세요? <Button bsStyle='primary'><Link to='/signup'>회원가입</Link></Button>
+            아직 회원이 아니세요? <Button bsStyle='primary' onClick={()=>this.props.openSignupModal()}>회원가입</Button>
           </Modal.Footer>
         </Modal>
       </div>
