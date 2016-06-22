@@ -48,29 +48,33 @@ class NavBar extends React.Component {
     const{dispatch, isLogin}=this.props;
 
     return (
-      <div className="navigation">
-        <ul>
-          <li><Link to="/">AFM</Link></li>
-          <li><Link to="/team">i1</Link></li>
-          <li>i2</li>
-          <li>i3</li>
-        </ul>
+      <div className='navbar'>
+        <div className='container-fluid'>
+          <div className='navbar-header'>
+            <Link to="/">AFM</Link>
+          </div>
+          <div className='navbar-header'>
+            <UserComp
+              isLoginModalOpened={this.props.isLoginModalOpened}
+              isSignupModalOpened={this.props.isSignupModalOpened}
+              isSignupFormModalOpened={this.props.isSignupFormModalOpened}
+              openLoginModal={()=>this.openLoginModal()}
+              closeLoginModal={()=>this.closeLoginModal()}
+              openSignupModal={()=>this.openSignupModal()}
+              closeSignupModal={()=>this.closeSignupModal()}
+              openSignupFormModal={()=>this.openSignupFormModal()}
+              closeSignupFormModal={()=>this.closeSignupFormModal()}
 
-        <UserComp
-          isLoginModalOpened={this.props.isLoginModalOpened}
-          isSignupModalOpened={this.props.isSignupModalOpened}
-          isSignupFormModalOpened={this.props.isSignupFormModalOpened}
-          openLoginModal={()=>this.openLoginModal()}
-          closeLoginModal={()=>this.closeLoginModal()}
-          openSignupModal={()=>this.openSignupModal()}
-          closeSignupModal={()=>this.closeSignupModal()}
-          openSignupFormModal={()=>this.openSignupFormModal()}
-          closeSignupFormModal={()=>this.closeSignupFormModal()}
-
-          login={(user)=>this.login(user)}
-          signup={(user)=>this.signup(user)}
-          isLogin={this.props.isLogin}/>
-
+              login={(user)=>this.login(user)}
+              signup={(user)=>this.signup(user)}
+              isLogin={this.props.isLogin}/>
+          </div>
+          <ul className='navbar-user'>
+            <li><Link to="/team">i1</Link></li>
+            <li>i2</li>
+            <li>i3</li>
+          </ul>
+        </div>
       </div>
     );
   }

@@ -1,17 +1,47 @@
 /* Base Application Styles */
 
-.header{
+
+.navbar{
   max-width: 1000px;
   max-height: 100px;
+  min-height: 50px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  background-color: #f8f8f8;
+  border: 1px solid;
+}
+
+.board{
+  position: relative;
+  width: 800px;
+  background-color: green;
 }
 .container{
   margin-left: auto;
   margin-right: auto;
   width: 980px;
 }
+ul{
+  display: block;
+}
+
+li{
+  display: inline;
+}
+.navbar-header{
+  float: left;
+  padding: 15px;
+}
+.navbar-center{
+  padding: 15px;
+}
+
+.navbar-user{
+  float: right;
+  padding: 15px;
+}
+
 
 .subHead{
   padding-bottom:5px;

@@ -5,8 +5,6 @@ import fetch from 'isomorphic-fetch';
 /*
   ACTION CREATORS
  */
-
-/// action
 /*
   팀생성
  */

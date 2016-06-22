@@ -14,9 +14,7 @@ class App extends React.Component{
   render(){
     return(
       <div>
-        <div className='header'>
-          <NavBar />
-        </div>
+        <NavBar />
         <div className='container'>
         {this.props.children}
           <div className='footer'>

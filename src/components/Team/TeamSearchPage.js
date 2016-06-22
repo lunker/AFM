@@ -52,7 +52,7 @@ class TeamFindPage extends React.Component{
         <ul>
           {this.state.results.map((result, index) =>
             <div>
-              <li key={index}>{result.name} =>> {result.description}</li>
+              <li key={index}>{result.name} =>> {result.description} <Button >가입신청</Button> </li>
             </div>
           )}
         </ul>

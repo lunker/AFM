@@ -81,7 +81,7 @@ class User extends React.Component{
 
       <div>
         <Dropdown id="dropdown-custom-menu">
-          <a href="#" bsRole="toggle" >
+          <a bsRole="toggle" >
             custom Toggle
           </a>
 

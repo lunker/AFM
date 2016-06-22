@@ -25,3 +25,9 @@ export const CLOSE_SIGNUP_FORM_MODAL='CLOSE_SIGNUP_FORM_MODAL';
 //
 export const REQUEST_SIGNUP='REQUEST_SIGNUP';
 export const RECEIVE_SIGNUP='RECEIVE_SIGNUP';
+
+
+// team main
+//
+export const SELECT_TEAM='SELECT_TEAM';
+export const REQUEST_TEAM_ID='REQUEST_TEAM_ID';

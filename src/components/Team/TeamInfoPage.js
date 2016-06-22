@@ -30,7 +30,7 @@ class TeamInfo extends React.Component {
         <div>
           <h1>team name : {teamInfo[0].name}</h1>
           team description : {teamInfo[0].description}
-
+          
         </div>
       }
       </div>

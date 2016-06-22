@@ -13,8 +13,7 @@ const enhancer = compose(
 );
 
 const createStoreWithMiddleware = compose(
-  applyMiddleware(localStorageLoad, thunkMiddleware, localStorageDump),
-  enhancer
+  applyMiddleware(localStorageLoad, thunkMiddleware, localStorageDump)
 )(createStore);
 
 export default function configureStore(initialState) {

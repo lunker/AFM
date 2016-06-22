@@ -27,9 +27,9 @@ const teams = (state={
 
     case types.RECEIVE_TEAM:
       console.log('[REDUCER][RECEIVE_TEAM]');
-      console.log(action.team);
+      console.log(action.team[0]);
       return Object.assign({}, state, {
-        teamInfo: action.team,
+        teamInfo: action.team[0],
         isFetching: false
       });
 

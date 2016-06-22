@@ -8,6 +8,11 @@ import NewTeamModal from './NewTeamModal';
 import NewTeamCard from './NewTeamCard';
 import TeamCard from './TeamCard';
 import * as actions from '../../actions/index';
+import * as TeamMainActions from '../../actions/TeamMain';
+
+
+var async=require('async');
+
 
 class TeamPage extends React.Component {
 
@@ -26,9 +31,25 @@ class TeamPage extends React.Component {
   openTeamInfo(teamId){
 
     console.log('team id ; ' + teamId);
-    this.props.dispatch(actions.getTeamById(teamId)).then(browserHistory.push('/teaminfo/'+teamId));
-    // browserHistory.push('/team/teaminfo/'+teamId);
+    const {dispatch}=this.props;
+
+    async.waterfall([
+
+      function(callback){
+        dispatch(TeamMainActions.selectTeam(teamId));
+        callback(null);
+      },
+      function(callback){
+        dispatch(actions.getTeamById(teamId));
+        callback(null);
+      },
+      function(callback){
+        // browserHistory.push('/teaminfo/'+teamId);
+        browserHistory.push('/m');
+      }
+    ]);
   }
+
   render() {
     const {dispatch, items, isFetching} = this.props;
 

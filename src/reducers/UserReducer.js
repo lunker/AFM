@@ -5,6 +5,8 @@ import * as types from '../constants/ActionTypes';
 const Users=(state={
   isLogin: false,
   id: '',
+  grade:'',
+  position:'',
   isLoginModalOpened: false,
   isSignupModalOpened: false,
   isSignupFormModalOpened: false
