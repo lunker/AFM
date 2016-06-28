@@ -14,8 +14,21 @@
 
 .board{
   position: relative;
-  width: 800px;
-  background-color: green;
+  width: 400px;
+  height: 600px;
+  background-image: url('/images/board3.png');
+  background-size: 400px 600px;
+  display: inline-block;;
+}
+
+.lineup{
+
+  margin-left: 100px;
+  width:400px;
+  height: 600px;
+  border: 1px solid;
+  display: inline-block;
+
 }
 .container{
   margin-left: auto;

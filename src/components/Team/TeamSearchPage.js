@@ -16,7 +16,7 @@ class TeamFindPage extends React.Component{
 
   searchTeam(){
     const name = ReactDOM.findDOMNode(this.refs.name).value;
-
+    console.log('search team name : ' + name);
     $.ajax({
       url: 'http://localhost:8888/teams/name/'+name,
       dataType: 'json',
@@ -29,7 +29,6 @@ class TeamFindPage extends React.Component{
         console.error('', status, err.toString());
       }.bind(this)
     });
-
   }
 
   render(){

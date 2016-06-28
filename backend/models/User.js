@@ -6,8 +6,9 @@ const userSchema=new Schema({
   id: String,
   password: String,
   name: String,
+  age: Number,
   grade: String, // 운영진, 주장,
-  position: String // fw, mf df, gk 
+  position: String // fw, mf df, gk
 });
 
 

@@ -83,6 +83,13 @@ app.get('/dist/:resource', function(req,res){
   res.sendFile(path.join(__dirname,'dist',req.params.resource));
 });
 
+app.get('/images/:resource', function(req,res){
+  console.log('IMAGES');
+  res.sendFile(path.join(__dirname,'src', 'images',req.params.resource));
+});
+
+
+
 app.get('*', function (req, res) {
   console.log('REQUEST');
   res.sendFile(path.join(__dirname, 'src','index.html'));

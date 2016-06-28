@@ -38,12 +38,28 @@ app.get('/teams', function(req,res){
  */
 app.get('/teams/:team_id', function(req,res){
   console.log('[REQUEST][TEAM_BY_ID]');
-  Team.find({_id: req.params.team_id}, function(err,teams){
-    if(err){
-      return res.status(500).json({error:'error!'});
-    }
-    res.json(teams);
-  });
+
+  const teamId=req.params.team_id;
+  console.log(teamId);
+  // search all team
+  if(teamId==''){
+    Team.find(function(err,teams){
+      if(err){
+        return res.status(500).json({error:'error!'});
+      }
+      console.log('[REQUEST][ALL_TEAM] :'+teams);
+      res.json(teams);
+    });
+  }
+  else{
+    Team.find({_id: req.params.team_id}, function(err,teams){
+      if(err){
+        return res.status(500).json({error:'error!'});
+      }
+      res.json(teams);
+    });
+  }
+
 });
 
 /*
@@ -84,5 +100,28 @@ app.post('/team/newteam', function(req,res){
   });
 });
 
+
+
+/*
+  팀 멤버 조회
+ */
+
+app.get('/team/lineup', function(req,res){
+  console.log('[REQUEST][TEAM][MAKE NEW TEAM]');
+
+
+  const teamId=req.body.teamId;
+
+  console.log('[REQUEST][TEAM][MAKE NEW TEAM] : '+team);
+  User.find({'_id': teamId},function(err, users){
+    if(err){
+      console.error(err);
+      res.json({result:0});
+      return;
+    }// end if
+    res.json(users);
+  });
+
+});
 
 module.exports=app;

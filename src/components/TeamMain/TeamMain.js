@@ -17,7 +17,18 @@ class TeamMain extends React.Component {
   }
 
   openTeamFormation(){
-    browserHistory.push('m/formation');
+
+    const {dispatch} = this.props;
+
+    async.waterfall(
+      function(callback){
+        // dispatch(actions.getTeamLineup());
+        callback(null);
+      },
+      function(callback){
+        browserHistory.push('m/formation');
+      }
+    );
   }
 
   render() {

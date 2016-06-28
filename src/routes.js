@@ -15,15 +15,15 @@ import TeamMainPage from './components/TeamMain/TeamMainPage';
 import TeamFormation from './components/TeamMain/TeamFormation'
 export default (
   <Route path="/" component={App}>
-    <Route path="team" component={TeamPage}>
-      <Route path="newteam" component={TeamMake} />
+    <Route path="/team" component={TeamPage}>
+      <Route path="/team/newteam" component={TeamMake} />
     </Route>
-    <Route path="teaminfo/:team_id" component={TeamInfoPage} />
-    <Route path="teamsearch" component={TeamSearchPage} />
-    <Route path='signup' component={SignupPage} />
-    <Route path='m' component={TeamMainPage}>
+    <Route path="/teaminfo/:team_id" component={TeamInfoPage} />
+    <Route path="/teamsearch" component={TeamSearchPage} />
+    <Route path='/signup' component={SignupPage} />
+    <Route path='/m' component={TeamMainPage}>
       <IndexRoute component={TeamMain}/>
-      <Route path='formation' component={TeamFormation}></Route>
+      <Route path='/m/formation' component={TeamFormation}></Route>
     </Route>
   </Route>
 )
